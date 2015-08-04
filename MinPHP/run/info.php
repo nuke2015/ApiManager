@@ -368,7 +368,7 @@
                 </div>
                 <h4 class="textshadow"><?php echo $v['name']?></h4>
                 <p>
-                    <b>编号&nbsp;&nbsp;:&nbsp;&nbsp;<span style="color:red"><?php echo $v['num']?></span></b>
+                    <b>编号&nbsp;&nbsp;:&nbsp;&nbsp;<span style="color:red"><?php echo $v['id']?></span></b>
                 </p>
                 <div>
                     <?php
