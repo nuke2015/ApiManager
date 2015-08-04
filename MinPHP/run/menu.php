@@ -17,14 +17,14 @@
                 <br>
                 <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;'.$v['cdesc'];echo "<input type='hidden' name='aid' value='{$v['aid']}'>";?>
                 <br>
-                <?php if(is_supper()){?>
                 <!--只有超级管理员才可以对分类进行操作-->
                 <div style="float:right;margin-right:16px;">
+                <?php if(is_supper()){?>
                     &nbsp;<button class="btn btn-danger btn-xs" name="op" value="delete" onclick="javascript:return confirm('您确认要删除吗?')">delete</button>
                     &nbsp;<button class="btn btn-info btn-xs" name="op" value="edit">edit</button>
-                </div>
-                <br>
                 <?php } ?>
+                <a href="<?php echo U(array('act'=>'api','tag'=>$v['aid'],'op'=>'postman'))?>" class="btn btn-xs btn-primary" target="_blank"> 导出postman格式 </a> 
+                </div>
                 <hr>
             </li>
             <!--接口分类关键字(js通过此关健字进行模糊查找)start-->
