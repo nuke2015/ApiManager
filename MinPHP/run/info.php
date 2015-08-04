@@ -108,12 +108,12 @@
             <div style="margin-left:20px;">
                 <form action="?act=api&tag=<?php echo $_GET['tag']?>&type=do&op=add" method="post">
                     <h5>基本信息</h5>
-                    <div class="form-group has-error">
+                    <!-- <div class="form-group has-error">
                         <div class="input-group">
                             <div class="input-group-addon">接口编号</div>
-                            <input type="text" class="form-control" name="num" placeholder="接口编号" required="required">
+                            <input type="text" class="form-control" name="num" placeholder="接口编号">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group has-error">
                         <div class="input-group">
                             <div class="input-group-addon">接口名称</div>
@@ -142,14 +142,42 @@
                             <tr>
                                 <th class="col-md-3">参数名</th>
                                 <th class="col-md-2">必传</th>
-                                <th class="col-md-2">缺省值</th>
                                 <th class="col-md-4">描述</th>
+                                <th class="col-md-2">缺省值</th>
                                 <th class="col-md-1">
                                     <button type="button" class="btn btn-success" onclick="add()">新增</button>
                                 </th>
                             </tr>
                             </thead>
                             <tbody id="parameter">
+                            <tr>
+                                <td class="form-group has-error">
+                                    <input type="text" class="form-control" name="p[name][]" placeholder="参数名" required="required" value="methodName">
+                                </td>
+                                <td>
+                                    <select class="form-control" name="p[type][]">
+                                        <option value="Y">Y</option>
+                                        <option value="N">N</option>
+                                    </select>
+                                </td>
+                                <td><textarea name="p[des][]" rows="1" class="form-control" placeholder="描述">接口方法名</textarea></td>
+                                <td><input type="text" class="form-control" name="p[default][]" placeholder="缺省值"></td>
+                                <td><button type="button" class="btn btn-danger" onclick="del(this)">删除</button></td>
+                            </tr>
+                            <tr>
+                                <td class="form-group has-error">
+                                    <input type="text" class="form-control" name="p[name][]" placeholder="参数名" required="required" value="version">
+                                </td>
+                                <td>
+                                    <select class="form-control" name="p[type][]">
+                                        <option value="Y">Y</option>
+                                        <option value="N">N</option>
+                                    </select>
+                                </td>
+                                <td><textarea name="p[des][]" rows="1" class="form-control" placeholder="描述">接口版本号</textarea></td>
+                                <td><input type="text" class="form-control" name="p[default][]" placeholder="缺省值"></td>
+                                <td><button type="button" class="btn btn-danger" onclick="del(this)">删除</button></td>
+                            </tr>
                             <tr>
                                 <td class="form-group has-error">
                                     <input type="text" class="form-control" name="p[name][]" placeholder="参数名" required="required">
@@ -160,8 +188,8 @@
                                         <option value="N">N</option>
                                     </select>
                                 </td>
-                                <td><input type="text" class="form-control" name="p[default][]" placeholder="缺省值"></td>
                                 <td><textarea name="p[des][]" rows="1" class="form-control" placeholder="描述"></textarea></td>
+                                <td><input type="text" class="form-control" name="p[default][]" placeholder="缺省值"></td>
                                 <td><button type="button" class="btn btn-danger" onclick="del(this)">删除</button></td>
                             </tr>
                             </tbody>
@@ -212,14 +240,8 @@
             <h4>修改接口<span style="font-size:12px;padding-left:20px;color:#a94442">注:"此色"边框为必填项</span></h4>
             <div style="margin-left:20px;">
                 <form action="?act=api&tag=<?php echo $_GET['tag']?>&type=do&op=edit" method="post">
+                    <input type="hidden" class="form-control" name="id" placeholder="接口编号" value="<?php echo $info['id']?>" >
                     <h5>基本信息</h5>
-                    <div class="form-group has-error">
-                        <div class="input-group">
-                            <div class="input-group-addon">接口编号</div>
-                            <input type="hidden" name="id" value="<?php echo $info['id']?>"/>
-                            <input type="text" class="form-control" name="num" placeholder="接口编号" value="<?php echo $info['num']?>" required="required">
-                        </div>
-                    </div>
                     <div class="form-group has-error">
                         <div class="input-group">
                             <div class="input-group-addon">接口名称</div>
@@ -252,8 +274,8 @@
                             <tr>
                                 <th class="col-md-3">参数名</th>
                                 <th class="col-md-2">必传</th>
-                                <th class="col-md-2">缺省值</th>
                                 <th class="col-md-4">描述</th>
+                                <th class="col-md-2">缺省值</th>
                                 <th class="col-md-1">
                                     <button type="button" class="btn btn-success" onclick="add()">新增</button>
                                 </th>
@@ -277,8 +299,8 @@
                                         <option value="N" <?php echo $selected[1]?>>N</option>
                                     </select>
                                 </td>
-                                <td><input type="text" class="form-control" name="p[default][]" placeholder="缺省值" value="<?php echo $info['parameter']['default'][$i]?>"></td>
                                 <td><textarea name="p[des][]" rows="1" class="form-control" placeholder="描述"><?php echo $info['parameter']['des'][$i]?></textarea></td>
+                                <td><input type="text" class="form-control" name="p[default][]" placeholder="缺省值" value="<?php echo $info['parameter']['default'][$i]?>"></td>
                                 <td><button type="button" class="btn btn-danger" onclick="del(this)">删除</button></td>
                             </tr>
                             <?php } ?>
@@ -309,10 +331,10 @@
                 '</select >' +
                 '</td>' +
                 '<td>' +
-                '<input type="text" class="form-control" name="p[default][]" placeholder="缺省值"></td>' +
-                '<td>' +
                 '<textarea name="p[des][]" rows="1" class="form-control" placeholder="描述"></textarea>' +
                 '</td>' +
+                '<td>' +
+                '<input type="text" class="form-control" name="p[default][]" placeholder="缺省值"></td>' +
                 '<td>' +
                 '<button type="button" class="btn btn-danger" onclick="del(this)">删除</button>' +
                 '</td>' +
@@ -327,6 +349,11 @@
 <?php }else{ ?>
     <!--接口详细列表start-->
     <?php if(count($list)){ ?>
+    	<div class="info-api">
+    		<a href="/index.php?act=api&tag=<?php echo intval($_GET['tag']);?>&op=add" class="btn btn-success">新建接口</a>
+    	</div>
+    	<div class="clearfix"></div>
+    	<br/>
         <?php foreach($list as $v){ ?>
         <div class="info_api" style="border:1px solid #ddd;margin-bottom:20px;" id="info_api_<?php echo md5($v['id'])?>">
             <div style="background:#f5f5f5;padding:20px;position:relative">
@@ -361,10 +388,10 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th class="col-md-3">参数名</th>
-                        <th class="col-md-2">必传</th>
-                        <th class="col-md-2">缺省值</th>
-                        <th class="col-md-5">描述</th>
+                        <th class="col-md-1">参数名</th>
+                        <th class="col-md-1">必传</th>
+                        <th class="col-md-1">缺省值</th>
+                        <th >描述</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -399,7 +426,7 @@
         </div>
         <!--接口详细列表end-->
         <!--接口详情返回顶部按钮start-->
-        <div id="gotop" onclick="goTop()" style="z-index:999999;display:none;color:#e6e6e6;cursor:pointer;width:34px;height:34px;border:#ddd 1px solid;line-height:35px;text-align:center;background:rgba(91,192,222, 0.8);position:fixed;right:1px;top:200px;border-radius:50%">
+        <div id="gotop" onclick="goTop()" style="z-index:999999;display:none;color:#e6e6e6;cursor:pointer;width:34px;height:34px;border:#ddd 1px solid;line-height:35px;text-align:center;background:rgba(91,192,222, 0.8);position:fixed;right:40px;top:200px;border-radius:50%">
             T
         </div>
         <!--接口详情返回顶部按钮end-->
