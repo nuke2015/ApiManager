@@ -218,10 +218,10 @@
                 '</select >' +
                 '</td>' +
                 '<td>' +
-                '<input type="text" class="form-control" name="p[default][]" placeholder="缺省值"></td>' +
-                '<td>' +
                 '<textarea name="p[des][]" rows="1" class="form-control" placeholder="描述"></textarea>' +
                 '</td>' +
+                '<td>' +
+                '<input type="text" class="form-control" name="p[default][]" placeholder="缺省值"></td>' +
                 '<td>' +
                 '<button type="button" class="btn btn-danger" onclick="del(this)">删除</button>' +
                 '</td>' +
