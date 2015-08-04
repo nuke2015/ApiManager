@@ -349,9 +349,11 @@
 <?php }else{ ?>
     <!--接口详细列表start-->
     <?php if(count($list)){ ?>
+    	<?php if(is_lgoin()): ?>
     	<div class="info-api">
     		<a href="/index.php?act=api&tag=<?php echo intval($_GET['tag']);?>&op=add" class="btn btn-success">新建接口</a>
     	</div>
+    	<?php endif; ?>
     	<div class="clearfix"></div>
     	<br/>
         <?php foreach($list as $v){ ?>
