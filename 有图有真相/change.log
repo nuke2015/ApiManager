@@ -28,3 +28,9 @@
 增加一个postman格式导出功能.
 直接导出postman的标准配置文件,
 可导入postman中进行调试.
+
+2015年8月5日 15:19:47
+之前由于header被提前输出,所以,下载没成功,做成textarea复制.
+诸多不便,修改成直接导出下载postman.json文件.
+导出后,直接拖到postman中可导入到postman中.
+

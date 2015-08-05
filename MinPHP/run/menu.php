@@ -23,7 +23,7 @@
                     &nbsp;<button class="btn btn-danger btn-xs" name="op" value="delete" onclick="javascript:return confirm('您确认要删除吗?')">delete</button>
                     &nbsp;<button class="btn btn-info btn-xs" name="op" value="edit">edit</button>
                 <?php } ?>
-                <a href="<?php echo U(array('act'=>'api','tag'=>$v['aid'],'op'=>'postman'))?>" class="btn btn-xs btn-primary" target="_blank"> 导出postman格式 </a> 
+                <a href="<?php echo U(array('act'=>'postman','tag'=>$v['aid']))?>" class="btn btn-xs btn-primary" target="_blank"> 导出postman格式 </a> 
                 </div>
                 <hr>
             </li>

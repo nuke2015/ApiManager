@@ -36,6 +36,10 @@
         //导出静态文件
         case 'export':
             die(include('./MinPHP/run/export.php'));
+            break;        
+        //导出postman文件
+        case 'postman':
+            die(include('./MinPHP/run/postman.php'));
             break;
         //ajax请求
         case 'ajax':

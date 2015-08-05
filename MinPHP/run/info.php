@@ -89,19 +89,6 @@
            }
            $info['parameter'] = $info['parameter'];
        }
-   }else if($op == 'postman'){
-       //编辑界面
-       if(empty($id)){$id = I($_GET['id']);}
-       $aid = I($_GET['tag']);
-       //得到数据的详情信息start
-       $sql = "select * from api where aid='{$aid}'";
-       $info = select($sql);
-       if(count($info)){
-            foreach ($info as $key => &$value) {
-                $value['parameter']=unserialize($value['parameter']);
-            }
-            unset($value);
-        }
    }else{
         $sql = "select api.id,aid,num,url,name,des,parameter,memo,re,lasttime,lastuid,type,login_name
         from api
@@ -245,43 +232,6 @@
         }
     </script>
     <!--添加接口 end-->
-<?php }else if($op == 'postman'){ ?>
-<h3>复制以下文字,新建json文件,导入Postman即可食用!</h3>
-<textarea name="" style="width:100%;height:800px;">       
-{
-    "id": "api_1",
-    "name": "API",
-    "timestamp": <?php echo time(); ?>690,
-    "requests": [
-    <?php foreach ($info as $key => $value): ?>
-        {
-            "collectionId": "api_1",
-            "id": "<?php echo $value['id']; ?>",
-            "name": "<?php echo $value['name']; ?>",
-            "description": "",
-            "url": "<?php echo $value['url']; ?>",
-            "method": "<?php echo strtoupper($value['type']); ?>",
-            "headers": "",
-            "data": [
-            <?php foreach ($value['parameter']['name'] as $key1=>$para): ?>
-                {
-                    "key": "<?php echo $para ?>",
-                    "value": "<?php echo $value['parameter']['default'][$key1]; ?>",
-                    "type": "text"
-                }
-            <?php if($key1!=count($value['parameter']['name'])-1){echo ",";} ?>
-            <?php endforeach; ?>
-            ],
-            "dataMode": "params",
-            "timestamp": 0,
-            "responses": [],
-            "version": 2
-        }
-        <?php if($key!=count($info)-1){echo ",";} ?>
-    <?php endforeach; ?>
-    ]
-}
-</textarea>
 <?php }else if($op == 'edit'){ ?>
     <!--修改接口 start-->
     <div style="border:1px solid #ddd">
